@@ -104,6 +104,6 @@ This project was an amazing first step for me. I finally feel like I understand 
 
 This was my first major project in machine learning, and I had a blast making it. Hope you enjoy trying it out!
 
-#### If you are at this point and if you like my work then please leave a star.
+#### If you are at this point and if you liked my project then please leave a star.
 Thankyou,
 Sinhasharp
