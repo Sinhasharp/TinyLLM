@@ -1,3 +1,9 @@
+# WARNING THE PTH FILE PROVIDED IS TRAINED ON A DUAL GPU SETUP IN KAGGLE SO IF YOU HAVE A CPU ONLY MACHINE, IT WILL NOT LOAD.
+# PLEASE TRAIN THE MODEL YOURSELF USING main.py TO GET A CPU COMPATIBLE PTH
+# IF YOU HAVE A GPU, IT WILL LOAD FINE.
+# YOU CAN ALSO UPLOAD THE MODEL TO KAGGLE AND RUN IT THERE.
+
+
 import torch
 
 # This script is for "deployment". It loads a pre-trained model and uses it.
@@ -59,11 +65,15 @@ n_layers = 2
 model = TinyLLM(vocab_size, embedding_dim, hidden_dim, n_layers)
 
 # Load the saved weights (the "state dictionary").
-model.load_state_dict(torch.load('tinyllm.pth'))
+model.load_state_dict(torch.load('tinyllm(20KSTP).pth'))
 print("Model loaded successfully from tinyllm.pth")
+
+user_input = input("Enter a prompt to generate text (or press Enter to use default): ")
 
 # --- Generate Text ---
 print("\n--- Generating Text from Loaded Model ---")
-prompt = "He looked at me with a "
+
+prompt = user_input if user_input.strip() != "" else "Burn The Witch! "
+
 generated_text = generate(model, start_string=prompt, length=1000)
 print(generated_text)

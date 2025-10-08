@@ -1,3 +1,9 @@
+# WARNING THE PTH FILE PROVIDED IS TRAINED ON A DUAL GPU SETUP IN KAGGLE SO IF YOU HAVE A CPU ONLY MACHINE, IT WILL NOT LOAD.
+# PLEASE TRAIN THE MODEL YOURSELF USING main.py TO GET A CPU COMPATIBLE PTH
+# IF YOU HAVE A GPU, IT WILL LOAD FINE.
+# YOU CAN ALSO UPLOAD THE MODEL TO KAGGLE AND RUN IT THERE.
+
+
 import torch
 
 # --- Data Loading and Preparation ---
@@ -71,6 +77,13 @@ class TinyLLM(torch.nn.Module):
 embedding_dim = 128   # Size of the character embedding vectors
 hidden_dim = 256      # Number of neurons in the LSTM hidden layer
 n_layers = 2          # Number of layers in the LSTM
+
+# ADD THESE LINES:
+# -----------------------------------------------------------------
+# Check if a GPU (CUDA) is available, otherwise default to CPU
+device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+print(f"--- Using device: {device} ---")
+# -----------------------------------------------------------------
 
 # Create an instance of our model
 model = TinyLLM(vocab_size, embedding_dim, hidden_dim, n_layers)
@@ -146,8 +159,8 @@ criterion = torch.nn.CrossEntropyLoss()
 print("\n--- Starting Training ---")
 print("Train for a while (at least to step 500+) then press Ctrl+C to stop and generate text.")
 
-n_steps = 10000 # Increased steps so you can train for longer if you wish
-print_every = 100
+n_steps = 20000 # Increased steps so you can train for longer if you wish
+print_every = 50
 
 try:
     for step in range(n_steps):
